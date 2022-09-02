@@ -1,5 +1,5 @@
 <script>
-  import "trix/dist/trix.js";
+  import "trix/dist/trix.js"
   import "trix/dist/trix.css"
 
   let content
