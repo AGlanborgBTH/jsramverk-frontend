@@ -1,22 +1,14 @@
 <script>
-  import "trix/dist/trix.js"
-  import "trix/dist/trix.css"
+  import Trix from "./assets/trix.svelte";
+  import Toolbar from "./assets/toolbar/main.svelte";
 
-  let content
-
-  function handleSave () {
-    console.log(content.outerText)
-  }
-
+  let content;
 </script>
 
 <main>
-  <form on:submit|preventDefault={() =>{}}>
-    <div class="saveContainer">
-      <input on:click={handleSave} type="button" value="Save Project" class="save">
-    </div>
-    <input id="x" type="hidden" name="content">
-    <trix-editor bind:this={content} class="trix-content" input="x"></trix-editor>
+  <form on:submit|preventDefault={() => {}}>
+    <Toolbar bind:content />
+    <Trix bind:content />
   </form>
 </main>
 
@@ -32,22 +24,5 @@
     height: 100%;
     width: 100%;
     overflow-y: hidden;
-  }
-
-  trix-editor {
-    display: inherit;
-    height: 100%;
-    text-align: left;
-  }
-
-  .saveContainer {
-    display: flex;
-    flex-direction: row;
-    background-color: rgb(60, 60, 60);
-  }
-
-  .save {
-    padding: 5px;
-    margin: 10px 20px;
   }
 </style>
