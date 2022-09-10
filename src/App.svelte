@@ -1,14 +1,41 @@
 <script>
   import Trix from "./assets/trix.svelte";
   import Toolbar from "./assets/toolbar/main.svelte";
+  import {getAllDocs, getOneDocs} from "./assets/get.svelte"
 
-  let content;
+  let all = [];
+  let active = {
+    id: "",
+    content: ""
+  };
+  let trix = {
+    input: undefined,
+    editor: undefined
+  };
+  let title = "New Document"
+
+  function operate() {
+    if (active.id != "") {
+      all.forEach(element => {
+        if (element._id == active.id) {
+          title = element.title
+          active.content = element.innerHTML
+        }
+      });
+    } else {
+      title = "New Document"
+      active.content = ""
+    };
+  };
+
+  $: active.id, operate()
+  $: getAllDocs().then((result) => all = result)
 </script>
 
 <main>
   <form on:submit|preventDefault={() => {}}>
-    <Toolbar bind:content />
-    <Trix bind:content />
+    <Toolbar bind:all bind:active bind:trix bind:title />
+    <Trix bind:active bind:trix />
   </form>
 </main>
 

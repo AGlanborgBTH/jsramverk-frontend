@@ -1,10 +1,26 @@
 <script>
+  export let all
+  export let active
+  export let title
 </script>
 
 <div class="dropdown">
-  <input type="text" value="New Document" />
+  <input type="text" id={active.id} bind:value={title} />
   <div class="dropdown-content">
-    <input type="button" value="Hello World!" />
+    {#await all}
+      <input type="button" value="Wait..." disabled />
+    {:then all}
+      {#each all as doc}
+        {#if doc._id != active.id}
+          <input type="button" value={doc.title} id={doc._id} on:click={() => active.id = doc._id} />
+        {/if}
+      {/each}
+      {#if active.id != ""}
+        <input type="button" value="New document" on:click={() => active.id = ""} />
+      {/if}
+    {:catch}
+      <input type="button" value="Error" disabled />
+    {/await}
   </div>
 </div>
 
@@ -25,11 +41,6 @@
     color: rgb(220, 220, 220);
     min-width: 150px;
     left: 0px;
-  }
-
-  .dropdown-content:hover {
-    cursor: pointer;
-    background-color: rgb(52, 52, 52);
   }
 
   .dropdown:hover .dropdown-content {
@@ -54,7 +65,7 @@
   }
 
   input[type="button"] {
-    width: 120px;
+    width: 150px;
     height: 55px;
   }
 

@@ -1,8 +1,17 @@
 <script>
-  export let content = undefined;
+  export let active
+  export let trix
+  export let title
 
   function handleSave() {
-    console.log(content.innerText);
+    const doc = {
+      _id: active.id,
+      title: title,
+      content: trix.editor.innerText,
+      innerHTML: trix.input.value
+    }
+
+    console.log(doc);
   }
 </script>
 

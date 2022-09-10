@@ -1,12 +1,17 @@
 <script>
   import Dropdown from "./dropdown.svelte";
   import Save from "./save.svelte";
-  export let content = undefined;
+
+  export let all
+  export let active
+  export let trix
+  export let title
+
 </script>
 
 <div class="container">
-  <Save bind:content />
-  <Dropdown />
+  <Save bind:active bind:trix bind:title />
+  <Dropdown bind:all bind:active bind:title />
 </div>
 
 <style>
