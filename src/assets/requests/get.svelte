@@ -1,5 +1,6 @@
 <script context="module">
-  const URL = "http://localhost:8081"
+  import * as config from "../../../config/config.json"
+  const URL = config.URL
 
   export async function getAllDocs() {
     const response = await fetch(`${URL}/docs`);

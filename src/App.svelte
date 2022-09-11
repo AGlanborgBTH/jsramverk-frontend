@@ -1,7 +1,7 @@
 <script>
   import Trix from "./assets/trix.svelte";
   import Toolbar from "./assets/toolbar/main.svelte";
-  import {getAllDocs, getOneDocs} from "./assets/get.svelte"
+  import {getAllDocs} from "./assets/requests/get.svelte"
 
   let all = [];
   let active = {

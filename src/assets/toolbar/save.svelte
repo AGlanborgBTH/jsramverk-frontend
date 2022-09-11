@@ -1,9 +1,10 @@
 <script>
+  import { postOneDocs } from "../requests/post.svelte";
   export let active
   export let trix
   export let title
 
-  function handleSave() {
+  async function handleSave() {
     const doc = {
       _id: active.id,
       title: title,
@@ -11,7 +12,9 @@
       innerHTML: trix.input.value
     }
 
-    console.log(doc);
+    await postOneDocs(doc);
+
+    location.reload();
   }
 </script>
 
