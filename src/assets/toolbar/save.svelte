@@ -1,21 +1,5 @@
 <script>
-  import { postOneDocs } from "../requests/post.svelte";
-  export let active
-  export let trix
-  export let title
-
-  async function handleSave() {
-    const doc = {
-      _id: active.id,
-      title: title,
-      content: trix.editor.innerText,
-      innerHTML: trix.input.value
-    }
-
-    await postOneDocs(doc);
-
-    location.reload();
-  }
+  export let handleSave
 </script>
 
 <div>

@@ -16,7 +16,7 @@
         {/if}
       {/each}
       {#if active.id != ""}
-        <input type="button" value="New document" on:click={() => active.id = ""} />
+        <input type="button" value="New document" id="New Document" on:click={() => active.id = ""} />
       {/if}
     {:catch}
       <input type="button" value="Error" disabled />

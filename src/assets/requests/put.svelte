@@ -1,10 +1,10 @@
 <script context="module">
-  import * as config from "../../../config/config.json"
-  const URL = config.URL
+  import * as config from "../../../config/config.json";
+  const URL = config.URL;
 
-  export async function postDocs(data) {
-    const response = await fetch(`${URL}/docs/post`, {
-      method: "POST",
+  export async function putDocs(data) {
+    const response = await fetch(`${URL}/docs/put`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
