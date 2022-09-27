@@ -1,3 +1,4 @@
 {
-    "URL": "https://jsramverk-editor-angb21.azurewebsites.net/"
+    "URL": "https://jsramverk-editor-angb21.azurewebsites.net",
+    "LOCAL": "http://localhost:8082"
 }

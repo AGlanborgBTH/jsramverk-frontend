@@ -1,41 +1,71 @@
 <script>
+  import "https://cdn.socket.io/socket.io-3.0.0.js";
   import Trix from "./assets/trix.svelte";
   import Toolbar from "./assets/toolbar/main.svelte";
-  import {getAllDocs} from "./assets/requests/get.svelte"
+  import { getAllDocs } from "./assets/requests/get.svelte";
+  import { io } from "socket.io-client";
+  import * as conf from "../config/config.json";
 
+  let socket = io(conf.URL);
   let all = [];
-  let active = {
-    id: "",
-    content: ""
-  };
-  let trix = {
-    input: undefined,
-    editor: undefined
-  };
-  let title = "New Document"
+  let id = "";
+  let content = "";
+  let input;
+  let editor;
+  let title = "New Document";
 
-  function operate() {
-    if (active.id != "") {
-      all.forEach(element => {
-        if (element._id == active.id) {
-          title = element.title
-          active.content = element.innerHTML
+  function updActive() {
+    if (id != "") {
+      all.forEach((element) => {
+        if (element._id == id) {
+          title = element.title;
+          content = element.innerHTML;
         }
       });
     } else {
-      title = "New Document"
-      active.content = ""
-    };
-  };
+      title = "New Document";
+      content = "";
+    }
+  }
 
-  $: active.id, operate()
-  $: getAllDocs().then((result) => all = result)
+  function emitDoc() {
+    if (socket) {
+      const doc = {
+        id: id,
+        content: input.value,
+        title: title,
+        innerHTML: editor.innerHTML,
+      };
+
+      socket.emit("doc", doc);
+    }
+  }
+
+  socket.on("doc", function (doc) {
+    if (doc) {
+      if (id == doc.id) {
+        title = doc.title;
+        content = doc.content;
+        input.value = doc.content;
+        editor.innerHTML = doc.innerHTML;
+      }
+    }
+  });
+
+  addEventListener("keyup", (event) => {
+    if (event.key == " " || event.key == "Enter") {
+      emitDoc();
+    }
+  });
+
+  $: id, updActive();
+  $: getAllDocs().then((result) => (all = result));
 </script>
 
 <main>
   <form on:submit|preventDefault={() => {}}>
-    <Toolbar bind:all bind:active bind:trix bind:title />
-    <Trix bind:active bind:trix />
+    <Toolbar bind:socket bind:all bind:id bind:editor bind:input bind:title />
+    <Trix bind:content bind:editor bind:input />
   </form>
 </main>
 

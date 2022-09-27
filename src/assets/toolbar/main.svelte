@@ -4,17 +4,19 @@
   import { postDocs } from "../requests/post.svelte";
   import { putDocs } from "../requests/put.svelte"
 
+  export let socket
   export let all
-  export let active
-  export let trix
+  export let id
+  export let input
+  export let editor
   export let title
 
   let handleSave = async () => {
     const doc = {
-      _id: active.id,
+      _id: id,
       title: title,
-      content: trix.editor.innerText,
-      innerHTML: trix.input.value
+      content: editor.innerText,
+      innerHTML: input.value
     }
 
     if (doc._id) {
@@ -25,11 +27,17 @@
 
     location.reload();
   }
+
+  let handleNewDoc = (newId) => {
+    id = newId
+
+    socket.emit("newDoc", {id: newId})
+  }
 </script>
 
 <div class="container">
   <Save bind:handleSave />
-  <Dropdown bind:all bind:active bind:title />
+  <Dropdown bind:all bind:id bind:title bind:handleNewDoc />
 </div>
 
 <style>

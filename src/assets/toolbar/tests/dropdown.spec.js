@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom"
-import { render, fireEvent, screen, getByDisplayValue  } from "@testing-library/svelte"
+import { render, screen  } from "@testing-library/svelte"
 import Test from "../dropdown"
 
 test("Title-textbox loads", () => {
