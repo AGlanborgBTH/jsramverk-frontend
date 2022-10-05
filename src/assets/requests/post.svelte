@@ -3,7 +3,7 @@
   const URL = config.URL
 
   export async function postDocs(data) {
-    const response = await fetch(`${URL}/docs/post`, {
+    const response = await fetch(`${URL}/doc/post`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

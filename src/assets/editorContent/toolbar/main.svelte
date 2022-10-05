@@ -1,8 +1,8 @@
 <script>
   import Dropdown from "./dropdown.svelte";
   import Save from "./save.svelte";
-  import { postDocs } from "../requests/post.svelte";
-  import { putDocs } from "../requests/put.svelte"
+  import { postDocs } from "../../requests/post.svelte";
+  import { putDocs } from "../../requests/put.svelte"
 
   export let socket
   export let all

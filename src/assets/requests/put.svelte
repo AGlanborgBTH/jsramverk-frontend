@@ -3,7 +3,7 @@
   const URL = config.URL;
 
   export async function putDocs(data) {
-    const response = await fetch(`${URL}/docs/put`, {
+    const response = await fetch(`${URL}/doc/put`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
