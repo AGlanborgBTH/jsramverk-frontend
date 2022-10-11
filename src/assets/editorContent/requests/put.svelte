@@ -1,6 +1,6 @@
 <script context="module">
   import * as config from "../../../../config/config.json";
-  const URL = config.LOCAL;
+  const URL = config.URL;
 
   export async function putDocs(token, data) {
     const response = await fetch(`${URL}/doc/put`, {
