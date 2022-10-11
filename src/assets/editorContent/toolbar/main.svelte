@@ -22,9 +22,9 @@
     }
 
     if (doc._id) {
-      await putDocs(doc)
+      await putDocs(token, doc)
     } else {
-      await postDocs(doc);
+      await postDocs(token, doc);
     }
 
     getAllDocs(token).then((result) => (all = result))

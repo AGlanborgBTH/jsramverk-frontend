@@ -2,10 +2,11 @@
   import * as config from "../../../../config/config.json";
   const URL = config.URL;
 
-  export async function putDocs(data) {
+  export async function putDocs(token, data) {
     const response = await fetch(`${URL}/doc/put`, {
       method: "PUT",
       headers: {
+        "x-access-token": token,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),

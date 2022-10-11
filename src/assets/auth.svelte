@@ -4,6 +4,7 @@
     import { login } from "./authContent/requests/login.svelte"
 
     export let token
+    export let userId
 
     let page = 1
     let email = ""
@@ -32,6 +33,7 @@
 
         if (res["_id"] && res["email"] && res["token"]) {
             token = res["token"]
+            userId = res["_id"]
         }
     }
 </script>
