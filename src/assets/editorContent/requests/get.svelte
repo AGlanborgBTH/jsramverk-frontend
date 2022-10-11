@@ -1,11 +1,12 @@
 <script context="module">
   import * as config from "../../../../config/config.json"
-  const URL = config.URL
+  const URL = config.LOCAL
 
-  export async function getAllDocs(token) {
+  export async function getAllDocs(token, userId) {
     const response = await fetch(`${URL}/doc`, {
       headers: {
         "x-access-token": token,
+        "data-user-id": userId
       }
     });
     const result = await response.json();

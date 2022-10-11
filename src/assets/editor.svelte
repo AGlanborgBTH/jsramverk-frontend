@@ -7,6 +7,7 @@
   import * as conf from "../../config/config.json";
 
   export let token
+  export let userId
 
   let socket = io(conf.URL);
   let all = [];
@@ -61,12 +62,12 @@
   });
 
   $: id, updActive();
-  $: getAllDocs(token).then((result) => (all = result));
+  $: getAllDocs(token, userId).then((result) => (all = result));
 </script>
 
 <main>
   <form on:submit|preventDefault={() => {}}>
-    <Toolbar bind:token bind:socket bind:all bind:id bind:editor bind:input bind:title />
+    <Toolbar bind:token bind:userId bind:socket bind:all bind:id bind:editor bind:input bind:title />
     <Trix bind:content bind:editor bind:input />
   </form>
 </main>

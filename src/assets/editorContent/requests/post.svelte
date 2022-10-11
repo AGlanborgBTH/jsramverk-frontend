@@ -1,6 +1,6 @@
 <script context="module">
   import * as config from "../../../../config/config.json"
-  const URL = config.URL
+  const URL = config.LOCAL
 
   export async function postDocs(token, data) {
     const response = await fetch(`${URL}/doc/post`, {

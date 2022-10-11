@@ -6,6 +6,7 @@
   import { getAllDocs } from "../requests/get.svelte";
 
   export let token
+  export let userId
   export let socket
   export let all
   export let id
@@ -18,16 +19,17 @@
       _id: id,
       title: title,
       content: editor.innerText,
-      innerHTML: input.value
+      innerHTML: input.value,
     }
 
     if (doc._id) {
       await putDocs(token, doc)
     } else {
+      doc.users = [userId]
       await postDocs(token, doc);
     }
 
-    getAllDocs(token).then((result) => (all = result))
+    getAllDocs(token, userId).then((result) => (all = result))
   }
 
   let handleNewDoc = (newId) => {

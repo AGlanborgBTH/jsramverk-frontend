@@ -7,7 +7,7 @@
 </script>
 
 {#if token}
-  <Editor bind:token />
+  <Editor bind:token bind:userId />
 {:else}
   <Auth bind:token bind:userId />
 {/if}
