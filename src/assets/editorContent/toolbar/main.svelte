@@ -1,9 +1,11 @@
 <script>
   import Dropdown from "./dropdown.svelte";
   import Save from "./save.svelte";
-  import { postDocs } from "../../requests/post.svelte";
-  import { putDocs } from "../../requests/put.svelte"
+  import { postDocs } from "../requests/post.svelte";
+  import { putDocs } from "../requests/put.svelte"
+  import { getAllDocs } from "../requests/get.svelte";
 
+  export let token
   export let socket
   export let all
   export let id
@@ -25,7 +27,7 @@
       await postDocs(doc);
     }
 
-    location.reload();
+    getAllDocs(token).then((result) => (all = result))
   }
 
   let handleNewDoc = (newId) => {

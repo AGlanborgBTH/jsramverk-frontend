@@ -2,9 +2,11 @@
   import "https://cdn.socket.io/socket.io-3.0.0.js";
   import Trix from "./editorContent/trix.svelte";
   import Toolbar from "./editorContent/toolbar/main.svelte";
-  import { getAllDocs } from "./requests/get.svelte";
+  import { getAllDocs } from "./editorContent/requests/get.svelte";
   import { io } from "socket.io-client";
   import * as conf from "../../config/config.json";
+
+  export let token
 
   let socket = io(conf.URL);
   let all = [];
@@ -59,12 +61,12 @@
   });
 
   $: id, updActive();
-  $: getAllDocs().then((result) => (all = result));
+  $: getAllDocs(token).then((result) => (all = result));
 </script>
 
 <main>
   <form on:submit|preventDefault={() => {}}>
-    <Toolbar bind:socket bind:all bind:id bind:editor bind:input bind:title />
+    <Toolbar bind:token bind:socket bind:all bind:id bind:editor bind:input bind:title />
     <Trix bind:content bind:editor bind:input />
   </form>
 </main>
