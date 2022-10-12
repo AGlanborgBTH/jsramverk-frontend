@@ -20,4 +20,19 @@
 
     return result.data;
   }
+
+  export async function getAllDocsIds(token, userId) {
+    const response = await fetch("/graphql", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({ query: `{ docs (cond: ${userId} ) { _id title content innerHTML } }` }),
+    })
+
+    const result = await response.json()
+
+    return result.data
+  }
 </script>
