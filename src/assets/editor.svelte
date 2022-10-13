@@ -2,7 +2,7 @@
   import "https://cdn.socket.io/socket.io-3.0.0.js";
   import Trix from "./editorContent/trix.svelte";
   import Toolbar from "./editorContent/toolbar/main.svelte";
-  import { getAllDocs } from "./editorContent/requests/get.svelte";
+  import { getAllDocsByUser } from "./editorContent/requests/get.svelte";
   import { io } from "socket.io-client";
   import * as conf from "../../config/config.json";
 
@@ -62,7 +62,7 @@
   });
 
   $: id, updActive();
-  $: getAllDocs(token, userId).then((result) => (all = result));
+  $: getAllDocsByUser(token, userId).then((result) => (all = result.docsByUser));
 </script>
 
 <main>
