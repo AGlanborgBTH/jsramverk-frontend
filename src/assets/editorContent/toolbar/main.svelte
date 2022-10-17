@@ -50,12 +50,12 @@
 
   let handleDownload = () => {
     if (navigator.userAgent.match(/firefox|fxios/i)) {
-      html2pdf().from(editor.innerHTML).save(`${title}.pdf`);
-    } else {
       const doc = new jsPDF("p", "pt", "letter");
 
       doc.text(editor.innerText, 20, 35);
       doc.save(`${title}.pdf`);
+    } else {
+      html2pdf().from(editor.innerHTML).save(`${title}.pdf`);
     }
   };
 </script>
