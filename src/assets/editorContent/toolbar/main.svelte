@@ -1,5 +1,6 @@
 <script>
   import { jsPDF } from "jspdf";
+  import html2pdf from "html2pdf.js/dist/html2pdf.bundle";
 
   import Dropdown from "./dropdown.svelte";
   import Save from "./save.svelte";
@@ -48,11 +49,14 @@
   };
 
   let handleDownload = () => {
-    const doc = new jsPDF("p", "pt", "letter");
+    if (navigator.userAgent.match(/firefox|fxios/i)) {
+      html2pdf().from(editor.innerHTML).save(`${title}.pdf`);
+    } else {
+      const doc = new jsPDF("p", "pt", "letter");
 
-    doc.text(editor.innerText, 20, 35);
-
-    doc.save(`${title}.pdf`);
+      doc.text(editor.innerText, 20, 35);
+      doc.save(`${title}.pdf`);
+    }
   };
 </script>
 
