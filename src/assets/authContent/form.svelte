@@ -1,16 +1,26 @@
 <script>
-    export let title
-    export let alter
-    export let email
-    export let password
-    export let handleSubmit
-    export let swapPage
+    export let title;
+    export let alter;
+    export let email;
+    export let password;
+    export let handleSubmit;
+    export let swapPage;
 </script>
 
 <form on:submit|preventDefault={handleSubmit}>
     <h2>{title}</h2>
-    <input type="email" id="username" bind:value={email} placeholder="Email Adress..." />
-    <input type="password" id="password" bind:value={password} placeholder="Password..." />
+    <input
+        type="email"
+        id="username"
+        bind:value={email}
+        placeholder="Email Adress..."
+    />
+    <input
+        type="password"
+        id="password"
+        bind:value={password}
+        placeholder="Password..."
+    />
     <input type="submit" value="Submit" />
     <input type="button" value={alter} class="alter" on:click={swapPage} />
 </form>

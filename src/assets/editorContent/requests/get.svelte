@@ -37,7 +37,7 @@
       headers: {
         "Content-Type": "application/json",
         "x-access-token": token,
-        "Accept": "application/json",
+        Accept: "application/json",
       },
       body: JSON.stringify({
         query,

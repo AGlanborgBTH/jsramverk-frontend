@@ -2,21 +2,21 @@
   import "trix/dist/trix.js";
   import "trix/dist/trix.css";
 
-  export let content
-  export let input
-  export let editor
+  export let content;
+  export let input;
+  export let editor;
 
   function updTrix() {
     if (editor && input) {
-      input.setAttribute("value", content)
-      editor.innerHTML = content
+      input.setAttribute("value", content);
+      editor.innerHTML = content;
     }
   }
 
-  $: content, updTrix()
+  $: content, updTrix();
 </script>
 
-<div>
+<div id="html">
   <input id="trixmainid" type="hidden" name="content" bind:this={input} />
   <trix-editor class="trix-content" input="trixmainid" bind:this={editor} />
 </div>

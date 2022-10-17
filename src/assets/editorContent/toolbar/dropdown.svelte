@@ -1,23 +1,33 @@
 <script>
-  export let all
-  export let id
-  export let title
-  export let handleNewDoc
+  export let all;
+  export let id;
+  export let title;
+  export let handleNewDoc;
 </script>
 
 <div class="dropdown">
-  <input type="text" id={id} bind:value={title} />
+  <input type="text" {id} bind:value={title} />
   <div class="dropdown-content">
     {#await all}
       <input type="button" value="Wait..." disabled />
     {:then all}
       {#each all as doc}
         {#if doc._id != id}
-          <input type="button" value={doc.title} id={doc._id} on:click={handleNewDoc(doc._id)} />
+          <input
+            type="button"
+            value={doc.title}
+            id={doc._id}
+            on:click={handleNewDoc(doc._id)}
+          />
         {/if}
       {/each}
       {#if id != ""}
-        <input type="button" value="New document" id="New Document" on:click={handleNewDoc("")} />
+        <input
+          type="button"
+          value="New document"
+          id="New Document"
+          on:click={handleNewDoc("")}
+        />
       {/if}
     {:catch}
       <input type="button" value="Error" disabled />

@@ -6,8 +6,8 @@
   import { io } from "socket.io-client";
   import * as conf from "../../config/config.json";
 
-  export let token
-  export let userId
+  export let token;
+  export let userId;
 
   let socket = io(conf.URL);
   let all = [];
@@ -16,6 +16,7 @@
   let input;
   let editor;
   let title = "New Document";
+  let num = 0;
 
   function updActive() {
     if (id != "") {
@@ -29,6 +30,14 @@
       title = "New Document";
       content = "";
     }
+  }
+
+  function updPublic() {
+    all.forEach((doc) => {
+      if (doc._id == "*") {
+        doc._id = `public${num}`;
+      }
+    });
   }
 
   function emitDoc() {
@@ -62,12 +71,24 @@
   });
 
   $: id, updActive();
-  $: getAllDocsByUser(token, userId).then((result) => (all = result.docsByUser));
+  $: getAllDocsByUser(token, userId).then(
+    (result) => (all = result.docsByUser)
+  );
+  $: all, updPublic();
 </script>
 
 <main>
   <form on:submit|preventDefault={() => {}}>
-    <Toolbar bind:token bind:userId bind:socket bind:all bind:id bind:editor bind:input bind:title />
+    <Toolbar
+      bind:token
+      bind:userId
+      bind:socket
+      bind:all
+      bind:id
+      bind:editor
+      bind:input
+      bind:title
+    />
     <Trix bind:content bind:editor bind:input />
   </form>
 </main>

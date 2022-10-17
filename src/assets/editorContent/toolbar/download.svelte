@@ -1,8 +1,8 @@
 <script>
-  export let handleSave;
+  export let handleDownload;
 </script>
 
-<input on:click={handleSave} type="button" value="Save" class="save" />
+<input on:click={handleDownload} type="button" value="Download" class="save" />
 
 <style>
   .save {

@@ -1,9 +1,9 @@
 <script>
-  import Editor from "./assets/editor.svelte"
-  import Auth from "./assets/auth.svelte"
+  import Editor from "./assets/editor.svelte";
+  import Auth from "./assets/auth.svelte";
 
-  let token = ""
-  let userId = ""
+  let token = "";
+  let userId = "";
 </script>
 
 {#if token}

@@ -1,46 +1,66 @@
 <script>
+  import { jsPDF } from "jspdf";
+
   import Dropdown from "./dropdown.svelte";
   import Save from "./save.svelte";
+  import Download from "./download.svelte";
+
   import { postDocs } from "../requests/post.svelte";
-  import { putDocs } from "../requests/put.svelte"
+  import { putDocs } from "../requests/put.svelte";
   import { getAllDocs } from "../requests/get.svelte";
 
-  export let token
-  export let userId
-  export let socket
-  export let all
-  export let id
-  export let input
-  export let editor
-  export let title
+  export let token;
+  export let userId;
+  export let socket;
+  export let all;
+  export let id;
+  export let input;
+  export let editor;
+  export let title;
 
   let handleSave = async () => {
     const doc = {
-      _id: id,
       title: title,
       content: editor.innerText,
       innerHTML: input.value,
+    };
+
+    if (id.includes("public")) {
+      doc._id = "*";
+    } else {
+      doc._id = id;
     }
 
     if (doc._id) {
-      await putDocs(token, doc)
+      await putDocs(token, doc);
     } else {
-      doc.users = [userId]
+      doc.users = [userId];
       await postDocs(token, doc);
     }
 
-    getAllDocs(token, userId).then((result) => (all = result))
-  }
+    getAllDocs(token, userId).then((result) => (all = result));
+  };
 
   let handleNewDoc = (newId) => {
-    id = newId
+    id = newId;
 
-    socket.emit("newDoc", {id: newId})
-  }
+    socket.emit("newDoc", { id: newId });
+  };
+
+  let handleDownload = () => {
+    const doc = new jsPDF("p", "pt", "letter");
+
+    doc.text(editor.innerText, 20, 35);
+
+    doc.save(`${title}.pdf`);
+  };
 </script>
 
 <div class="container">
-  <Save bind:handleSave />
+  <div>
+    <Save bind:handleSave />
+    <Download bind:handleDownload />
+  </div>
   <Dropdown bind:all bind:id bind:title bind:handleNewDoc />
 </div>
 

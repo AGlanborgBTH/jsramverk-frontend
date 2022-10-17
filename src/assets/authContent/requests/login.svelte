@@ -5,8 +5,8 @@
   export async function login(email, password) {
     const data = {
       email: email,
-      password: password
-    }
+      password: password,
+    };
 
     const response = await fetch(`${URL}/user/login`, {
       method: "POST",
