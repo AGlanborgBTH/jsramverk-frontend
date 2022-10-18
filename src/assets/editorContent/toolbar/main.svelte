@@ -18,13 +18,25 @@
   export let input;
   export let editor;
   export let title;
+  export let comments
 
   let handleSave = async () => {
     const doc = {
       title: title,
       content: editor.innerText,
       innerHTML: input.value,
+      comments: {}
     };
+
+    if (comments) {
+      const temp = Object.entries(comments)
+
+      temp.forEach((comment) => {
+        if (comment[1]) {
+          doc.comments[comment[0]] = comment[1]
+        }
+      })
+    }
 
     if (id.includes("public")) {
       doc._id = "*";
@@ -54,6 +66,7 @@
 
       doc.text(editor.innerText, 20, 35);
       doc.save(`${title}.pdf`);
+      alert('Because of bug, firefox browsers will only print plain text')
     } else {
       html2pdf().from(editor.innerHTML).save(`${title}.pdf`);
     }

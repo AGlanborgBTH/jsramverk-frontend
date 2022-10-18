@@ -1,20 +1,24 @@
 <script>
   import "https://cdn.socket.io/socket.io-3.0.0.js";
+
   import Trix from "./editorContent/trix.svelte";
   import Toolbar from "./editorContent/toolbar/main.svelte";
-  import { getAllDocsByUser } from "./editorContent/requests/get.svelte";
+
+  import { getAllDocs } from "./editorContent/requests/get.svelte";
   import { io } from "socket.io-client";
+
   import * as conf from "../../config/config.json";
 
   export let token;
   export let userId;
+  export let editor;
+  export let comments;
 
   let socket = io(conf.URL);
   let all = [];
-  let id = "";
   let content = "";
-  let input;
-  let editor;
+  let id = "";
+  let input = undefined;
   let title = "New Document";
   let num = 0;
 
@@ -24,11 +28,13 @@
         if (element._id == id) {
           title = element.title;
           content = element.innerHTML;
+          comments = element.comments;
         }
       });
     } else {
       title = "New Document";
-      content = "";
+      content = "<div></div>";
+      comments = {};
     }
   }
 
@@ -47,6 +53,7 @@
         content: input.value,
         title: title,
         innerHTML: editor.innerHTML,
+        comments: comments
       };
 
       socket.emit("doc", doc);
@@ -60,19 +67,20 @@
         content = doc.content;
         input.value = doc.content;
         editor.innerHTML = doc.innerHTML;
+        comments = doc.comments
       }
     }
   });
 
   addEventListener("keyup", (event) => {
-    if (event.key == " " || event.key == "Enter") {
+    if (event.key == " " || event.key == "Enter" || event.key == "Backspace") {
       emitDoc();
     }
   });
 
   $: id, updActive();
-  $: getAllDocsByUser(token, userId).then(
-    (result) => (all = result.docsByUser)
+  $: getAllDocs(token, userId).then(
+    (result) => (all = result)
   );
   $: all, updPublic();
 </script>
@@ -88,6 +96,7 @@
       bind:editor
       bind:input
       bind:title
+      bind:comments
     />
     <Trix bind:content bind:editor bind:input />
   </form>
