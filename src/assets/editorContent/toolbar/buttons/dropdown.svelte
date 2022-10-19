@@ -41,6 +41,7 @@
     display: inline-block;
     color: rgb(220, 220, 220);
     width: 150px;
+    height: 55px;
   }
 
   .dropdown-content {

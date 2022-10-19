@@ -2,11 +2,12 @@
   import * as config from "../../../../config/config.json";
   const URL = config.URL;
 
-  export async function getAllDocs(token, userId) {
+  export async function getAllDocs(token, userId, userEmail) {
     const response = await fetch(`${URL}/doc`, {
       headers: {
         "x-access-token": token,
         "data-user-id": userId,
+        "data-user-email": userEmail,
       },
     });
     const result = await response.json();

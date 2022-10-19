@@ -5,6 +5,7 @@
 
   let token = "";
   let userId = "";
+  let userEmail = "";
   let editor = undefined;
   let comments = {};
 </script>
@@ -13,9 +14,9 @@
   {#if editor}
     <Comments bind:editor bind:comments />
   {/if}
-  <Editor bind:token bind:userId bind:editor bind:comments />
+  <Editor bind:token bind:userId bind:userEmail bind:editor bind:comments />
 {:else}
-  <Auth bind:token bind:userId />
+  <Auth bind:token bind:userId bind:userEmail />
 {/if}
 
 <style></style>

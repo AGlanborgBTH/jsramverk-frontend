@@ -5,6 +5,7 @@
 
     export let token;
     export let userId;
+    export let userEmail;
 
     let page = 1;
     let email = "";
@@ -34,6 +35,7 @@
         if (res["_id"] && res["email"] && res["token"]) {
             token = res["token"];
             userId = res["_id"];
+            userEmail = res["email"];
         }
     }
 </script>

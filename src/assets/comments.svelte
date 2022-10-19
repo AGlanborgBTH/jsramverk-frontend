@@ -10,7 +10,7 @@
 
     function updrow() {
         let br = editor.innerHTML.match(/br>+./g);
-        console.log("event");
+
         if (!br) {
             br = ["<"];
         }
@@ -123,12 +123,12 @@
     button:hover {
         outline: none;
         border: none;
-        background-color: rgb(220, 220, 220);
+        background-color: rgb(200, 200, 200);
     }
 
     button.white,
     div.white {
-        background-color: rgb(220, 220, 220);
+        background-color: rgb(200, 200, 200);
         color: rgb(0, 0, 0);
     }
 </style>

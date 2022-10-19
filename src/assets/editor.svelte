@@ -11,6 +11,7 @@
 
   export let token;
   export let userId;
+  export let userEmail;
   export let editor;
   export let comments;
 
@@ -21,6 +22,7 @@
   let input = undefined;
   let title = "New Document";
   let num = 0;
+  let emails = [];
 
   function updActive() {
     if (id != "") {
@@ -29,6 +31,7 @@
           title = element.title;
           content = element.innerHTML;
           comments = element.comments;
+          emails = element.emails;
         }
       });
     } else {
@@ -79,7 +82,7 @@
   });
 
   $: id, updActive();
-  $: getAllDocs(token, userId).then(
+  $: getAllDocs(token, userId, userEmail).then(
     (result) => (all = result)
   );
   $: all, updPublic();
@@ -97,6 +100,8 @@
       bind:input
       bind:title
       bind:comments
+      bind:userEmail
+      bind:emails
     />
     <Trix bind:content bind:editor bind:input />
   </form>

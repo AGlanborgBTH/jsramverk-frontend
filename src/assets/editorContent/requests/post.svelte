@@ -15,4 +15,18 @@
 
     return result.data;
   }
+
+  export async function postEmail(token, data) {
+    const response = await fetch(`${URL}/email`, {
+      method: "POST",
+      headers: {
+        "x-access-token": token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    const result = await response.json();
+
+    return result.data;
+  }
 </script>

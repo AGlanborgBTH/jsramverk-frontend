@@ -54,10 +54,11 @@
 
     input:focus {
         border: none;
+        outline: 3px solid rgb(100, 100, 100);
     }
 
     div {
-        background-color: rgb(220, 220, 220);
+        background-color: rgb(200, 200, 200);
         height: 20px;
         width: 100%;
         border-radius: 5px;
