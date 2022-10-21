@@ -6,7 +6,7 @@ test("'Save-button' loads", () => {
     let mockSave = jest.fn()
     render(Test, {handleSave: mockSave})
 
-    let button = screen.getByRole('button', { name: 'Save Project' })
+    let button = screen.getByRole('button', { name: 'Save' })
 
     expect(button).toBeInTheDocument()
 })
@@ -15,7 +15,7 @@ test("'Save-button' action", async () => {
     let mockSave = jest.fn()
     render(Test, {handleSave: mockSave})
 
-    let button = screen.getByRole('button', { name: 'Save Project' })
+    let button = screen.getByRole('button', { name: 'Save' })
 
     expect(button).toBeInTheDocument()
 
