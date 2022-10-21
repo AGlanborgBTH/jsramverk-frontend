@@ -2,7 +2,7 @@ import "@testing-library/jest-dom"
 import { render, fireEvent, screen } from "@testing-library/svelte"
 import Test from "../download"
 
-test("'Save-button' loads", () => {
+test("'Download-button' loads", () => {
     let mockDownload = jest.fn()
     render(Test, {handleDownload: mockDownload})
 
@@ -11,7 +11,7 @@ test("'Save-button' loads", () => {
     expect(button).toBeInTheDocument()
 })
 
-test("'Save-button' action", async () => {
+test("'Download-button' action", async () => {
     let mockDownload = jest.fn()
     render(Test, {handleDownload: mockDownload})
 
